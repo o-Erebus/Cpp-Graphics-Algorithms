@@ -43,13 +43,13 @@ Note: Both `graphics.h` and `libbgi.a` are included in the "Cpp-Graphics-Algorit
 
 To add the `graphics.h` header in CLion, follow these steps:
 
-1. Copy 'graphics.h' to "path\to\CLion\bin\mingw\lib\gcc\x86_64-w64-mingw32\13.1.0\include" and "path\to\CLion\bin\mingw\lib\gcc\x86_64-w64-mingw32\13.1.0\include\c++"
+1. Copy `graphics.h` to `path\to\CLion\bin\mingw\lib\gcc\x86_64-w64-mingw32\13.1.0\include` and `path\to\CLion\bin\mingw\lib\gcc\x86_64-w64-mingw32\13.1.0\include\c++`
 2. Restart Clion.
 
 
 To add the `libbgi.a` library to your project in CLion, follow these steps:
 
-1. Copy 'libbgi.a' to "path\to\CLion\bin\mingw\lib\gcc\x86_64-w64-mingw32\13.1.0"
+1. Copy `libbgi.a` to `path\to\CLion\bin\mingw\lib\gcc\x86_64-w64-mingw32\13.1.0`
 2. Open your `CMakeLists.txt` file.
 3. Use the `target_link_libraries()` function to link the library to your executable target.
    ```cmake
