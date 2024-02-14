@@ -53,9 +53,9 @@ To add the `libbgi.a` library to your project in CLion, follow these steps:
 2. Open your `CMakeLists.txt` file.
 3. Use the `target_link_libraries()` function to link the library to your executable target.
    ```cmake
-   target_link_libraries(YourExecutableName "\path\to\CLion\bin\mingw\lib\gcc\x86_64-w64-mingw32\13.1.0\include\libbgi.a")
+   target_link_libraries(YourProjextName "\path\to\CLion\bin\mingw\lib\gcc\x86_64-w64-mingw32\13.1.0\include\libbgi.a")
    ```
-   Replace `YourExecutableName` with the name of your executable target and `\path\to\` with the actual path to the Clion.
+   Replace `YourProjextName` with the name of your executable target and `\path\to\` with the actual path to the Clion.
 4. Save the changes and reload the CMake project in CLion.
 
 
