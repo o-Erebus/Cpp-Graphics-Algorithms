@@ -29,7 +29,7 @@ void drawLineDDA(int x1, int y1, int x2, int y2) {
     }
 }
 
-void drawLineBresenham(int x0, int y0, int x1, int y1)
+void drawLineBresenham(int x0, int y0, int x1, int y1,int color)
 {
     int dx = abs(x1 - x0);
     int dy = abs(y1 - y0);
@@ -41,7 +41,7 @@ void drawLineBresenham(int x0, int y0, int x1, int y1)
     if (dx >= dy) {
         int p = 2 * dy - dx;
         while (x != x1) {
-            putpixel(x, y, YELLOW);
+            putpixel(x, y, color);
             x += xStep;
             if (p >= 0) {
                 y += yStep;
@@ -52,7 +52,7 @@ void drawLineBresenham(int x0, int y0, int x1, int y1)
     } else {
         int p = 2 * dx - dy;
         while (y != y1) {
-            putpixel(x, y, YELLOW);
+            putpixel(x, y, color);
             y += yStep;
             if (p >= 0) {
                 x += xStep;
@@ -82,11 +82,11 @@ void plotOctant(int xc ,int x, int yc, int y, int color){
     putpixel(xc + y, yc + x, color);
 }
 
-void drawCircle(int xc, int yc, int radius) {
+void drawCircle(int xc, int yc, int radius,int color) {
     int y = radius, x = 0;
     int radiusError = 1 - radius;
     while (x <= y) {
-        plotOctant(xc,x,yc,y,14);
+        plotOctant(xc,x,yc,y,color);
         x++;
 
         if (radiusError < 0)
@@ -100,16 +100,16 @@ void drawCircle(int xc, int yc, int radius) {
 
 void drawCircleBresenham(int xc, int yc, int r) {
     int x = 0, y = r;
-    int s = 3 - 2 * r;
+    int p = 3 - 2 * r;
 
     while (x <= y) {
-        plotOctant(xc,x,yc,y,12);
+        plotOctant(xc,x,yc,y,LIGHTRED);
         x++;
-        if (s <= 0)
-            s = s + 4 * x + 1;
+        if (p <= 0)
+            p = p + 4 * x + 1;
         else {
             y--;
-            s = s + 4 * (x - y) + 1;
+            p = p + 4 * (x - y) + 1;
         }
     }
 }
@@ -117,7 +117,7 @@ void drawCircleBresenham(int xc, int yc, int r) {
 
 
 int main() {
-    int gd = DETECT, gm;
+
     initwindow(1600,800);
 
     drawLineDDA(607,690,607,500);
@@ -141,20 +141,25 @@ int main() {
     drawLineDDA(930,530,930,690);
     drawLineDDA(930,690,607,690);
 
+    setfillstyle(SOLID_FILL,LIGHTBLUE);
 
     for (int j = 530; j < 690; j+=30) {
         int i = 620;
         drawLineDDA(i, j, i + 20, j);
+
         drawLineDDA(i + 20, j, i + 20, j - 20);
         drawLineDDA(i + 20, j - 20, i, j - 20);
         drawLineDDA(i, j - 20, i, j);
+        floodfill(i+3,j-3,WHITE);
     }
+
     for (int j = 400; j < 690; j+=30) {
         int i = 661;
         drawLineDDA(i, j, i + 20, j);
         drawLineDDA(i + 20, j, i + 20, j - 20);
         drawLineDDA(i + 20, j - 20, i, j - 20);
         drawLineDDA(i, j - 20, i, j);
+        floodfill(i+3,j-3,WHITE);
     }
     for (int j = 295; j < 690; j+=30) {
         int i = 700;
@@ -162,6 +167,7 @@ int main() {
         drawLineDDA(i + 20, j, i + 20, j - 20);
         drawLineDDA(i + 20, j - 20, i, j - 20);
         drawLineDDA(i, j - 20, i, j);
+        floodfill(i+3,j-3,WHITE);
     }
 
     for (int j = 195; j < 690; j+=30) {
@@ -170,6 +176,7 @@ int main() {
         drawLineDDA(i + 20, j, i + 20, j - 20);
         drawLineDDA(i + 20, j - 20, i, j - 20);
         drawLineDDA(i, j - 20, i, j);
+        floodfill(i+3,j-3,WHITE);
     }
     for (int j = 227; j < 690; j+=30) {
         int i = 787;
@@ -177,6 +184,7 @@ int main() {
         drawLineDDA(i + 20, j, i + 20, j - 20);
         drawLineDDA(i + 20, j - 20, i, j - 20);
         drawLineDDA(i, j - 20, i, j);
+        floodfill(i+3,j-3,WHITE);
     }
     for (int j = 355; j < 690; j+=30) {
         int i = 822;
@@ -184,6 +192,7 @@ int main() {
         drawLineDDA(i + 20, j, i + 20, j - 20);
         drawLineDDA(i + 20, j - 20, i, j - 20);
         drawLineDDA(i, j - 20, i, j);
+        floodfill(i+3,j-3,WHITE);
     }
     for (int j = 467; j < 690; j+=30) {
         int i = 858;
@@ -191,6 +200,7 @@ int main() {
         drawLineDDA(i + 20, j, i + 20, j - 20);
         drawLineDDA(i + 20, j - 20, i, j - 20);
         drawLineDDA(i, j - 20, i, j);
+        floodfill(i+3,j-3,WHITE);
     }
     for (int j = 562; j < 690; j+=30) {
         int i = 898;
@@ -198,31 +208,57 @@ int main() {
         drawLineDDA(i + 20, j, i + 20, j - 20);
         drawLineDDA(i + 20, j - 20, i, j - 20);
         drawLineDDA(i, j - 20, i, j);
+        floodfill(i+3,j-3,WHITE);
     }
-    drawLineDDA(773,690,773,106);
 
-    // Draw the sun
-    setcolor(YELLOW);
-    setfillstyle(SOLID_FILL, YELLOW);
-    drawCircle(200, 150, 50); // Outer circle
+    setfillstyle(SOLID_FILL,LIGHTGRAY );
+    floodfill(780,680,WHITE);
+    //drawLineDDA(773,690,773,106);
 
-    setcolor(LIGHTRED);
+
+    drawCircle(200, 150, 54,YELLOW); // Outer circle
+    drawCircle(200, 150, 52,YELLOW); // Outer circle
+    setfillstyle(SOLID_FILL,YELLOW );
+    floodfill(253,150,YELLOW);
+
     drawCircleBresenham(200, 150, 40); // Middle circle
+    drawCircleBresenham(200, 150, 41); // Middle circle
 
-    setcolor(RED);
-    drawCircle(200, 150, 30); // Inner circle
+    drawCircle(200, 150, 30,YELLOW); // Inner circle
 
+    drawCircle(200,150,55,LIGHTGRAY);
+    int rayLength = 25 , Offset = 1;
 
-    int rayLength = 60;
-    for (int angle = 0; angle < 360; angle += 45) {
-        int x1 = 200 + 50 * cos(angle * 3.14 / 180);
-        int y1 = 150 + 50 * sin(angle * 3.14 / 180);
-        int x2 = 200 + (50 + rayLength) * cos(angle * 3.14 / 180);
-        int y2 = 150 + (50 + rayLength) * sin(angle * 3.14 / 180);
-        drawLineBresenham(x1, y1, x2, y2);
+    //SUN
+    while(true) {
+
+        rayLength += Offset;
+        for (int angle = 0; angle < 360; angle += 20) {
+            int color = YELLOW;
+
+            //if(angle%40==0){
+            //    color = RED;
+            //}
+
+            int x1 = 200 + 65 * cos(angle * 3.14 / 180);
+            int y1 = 150 + 65 * sin(angle * 3.14 / 180);
+            int x2 = 200 + (65 + rayLength) * cos(angle * 3.14 / 180);
+            int y2 = 150 + (65 + rayLength) * sin(angle * 3.14 / 180);
+            drawLineBresenham(x1, y1, x2, y2,color);
+        }
+        if(rayLength>=50 ){
+            setfillstyle(SOLID_FILL,BLACK);
+            drawCircle(200,150,55,LIGHTGRAY);
+            floodfill(1000,700,LIGHTGRAY);
+            rayLength = 10;
+        }
+        delay(5);
+        if(kbhit()){
+            break;
+        }
     }
-
     getch();
+    cleardevice();
     closegraph();
     return 0;
 }
